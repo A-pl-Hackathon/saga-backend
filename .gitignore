@@ -1,0 +1,27 @@
+# 환경설정 파일
+.env
+
+# SQLite 데이터베이스 파일
+*.db
+*.sqlite
+
+# 가상환경 폴더
+venv/
+.venv/
+env/
+
+# Python 캐시 파일
+__pycache__/
+*.pyc
+
+# IDE 관련 파일
+.vscode/
+.idea/
+
+# 맥OS 임시 파일
+.DS_Store
+
+# Jupyter Notebook 체크포인트
+.ipynb_checkpoints
+
+sqlite3.db
