@@ -46,5 +46,7 @@ def send_erc20_token(token_address, recipient_address, amount):
     })
 
     signed_tx = w3.eth.account.sign_transaction(tx, PRIVATE_KEY)
-    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+    tx_hex = "0x" + tx_hash.hex().lstrip("0x")  # 명시적으로 0x 추가 (중복 방지
+
     return tx_hash.hex()
