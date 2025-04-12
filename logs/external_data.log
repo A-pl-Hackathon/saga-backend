@@ -1,8 +1,0 @@
-2025-04-12 07:49:07,912 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
-2025-04-12 07:49:07,912 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("post")
-2025-04-12 07:49:07,912 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
-2025-04-12 07:49:07,913 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("comment")
-2025-04-12 07:49:07,914 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
-2025-04-12 07:49:07,914 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("userwallet")
-2025-04-12 07:49:07,914 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
-2025-04-12 07:49:07,914 - sqlalchemy.engine.Engine - INFO - COMMIT
