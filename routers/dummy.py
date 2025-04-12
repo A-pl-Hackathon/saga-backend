@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post("/dummy/post")
 def create_dummy_post(session: Session = Depends(get_session)):
     dummy_post = Post(
-        agent_public_key="0x217809D972C648B29494E2C0F9C262B1D1CE46DC",
+        agent_public_key="0xb506D2B0Dcc0A312066fd5C4F8bA225d33B695b9",
         content="테스트 게시글입니다.",
         hash="dummyhash",
         created_at=datetime.utcnow(),

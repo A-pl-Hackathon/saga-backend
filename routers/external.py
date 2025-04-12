@@ -35,3 +35,8 @@ async def receive_external_data(request: ExternalData, session: Session = Depend
     logger.info(f"Successfully registered new wallet: {request.personalData.walletAddress}")
 
     return {"message": "External data and private key received successfully."}
+
+@router.get("/")
+async def get_external_data(session: Session = Depends(get_session)):
+    wallets = session.query(UserWallet).all()
+    return [wallet.model_dump() for wallet in wallets]
