@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager  # 추가
-from routers import posts, comments, token_transfer, external  # 추가
+from routers import posts, comments, token_transfer, external, llm_execution, dummy  # 추가
 from database.connection import conn
 
 @asynccontextmanager
@@ -30,3 +30,5 @@ app.include_router(comments.router, prefix="/comments", tags=["Comments"])
 # 추가한 라우터 등록
 app.include_router(token_transfer.router, prefix="/blockchain", tags=["Token Transfer"])
 app.include_router(external.router, tags=["External Data"])
+app.include_router(llm_execution.router, prefix="/llm", tags=["LLM Execution"])
+app.include_router(dummy.router, prefix="/dummy", tags=["Dummy Data"])
