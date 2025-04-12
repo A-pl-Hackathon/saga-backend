@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SAGA_CONTRACT_ADDRESS = os.getenv("SAGA_CONTRACT_ADDRESS")
 SAGA_RPC_URL = os.getenv("SAGA_RPC_URL")
 
 # Saga 스마트 컨트랙트의 ABI 로드
@@ -18,16 +17,15 @@ w3_saga = Web3(Web3.HTTPProvider(SAGA_RPC_URL))
 w3_saga.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 # 컨트랙트 인스턴스화
-saga_token_contract = w3_saga.eth.contract(
-    address=w3_saga.to_checksum_address(SAGA_CONTRACT_ADDRESS), 
-    abi=SAGA_CONTRACT_ABI
-)
 
 # Saga ERC-20 토큰 전송 함수
-def send_saga_token(private_key: str, recipient_address: str, amount: float):
+def send_saga_token(private_key: str, token_address: str, recipient_address: str, amount: float):
     account = w3_saga.eth.account.from_key(private_key)
     wallet_address = account.address
-
+    saga_token_contract = w3_saga.eth.contract(
+        address=w3_saga.to_checksum_address(token_address), 
+        abi=SAGA_CONTRACT_ABI
+    )
     decimals = saga_token_contract.functions.decimals().call()
     amount_in_wei = int(amount * (10 ** decimals))
 

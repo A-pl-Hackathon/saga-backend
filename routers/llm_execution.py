@@ -21,8 +21,8 @@ router = APIRouter()
 
 load_dotenv()
 
-MTK_CONTRACT_ADDRESS = os.getenv("MTK_CONTRACT_ADDRESS")
-logger.info(f"Using MTK Contract Address: {MTK_CONTRACT_ADDRESS}")
+CONTRACT_ADDRESS = os.getenv("CONTRACT_ADDRESS")
+logger.info(f"Using MTK Contract Address: {CONTRACT_ADDRESS}")
 
 # LLM이 호출하는 함수 형태 정의
 class LLMFunctionCall(BaseModel):
@@ -75,12 +75,12 @@ def increment_like(validated_args: IncrementLikeArgs, session: Session):
             logger.error(f"Invalid private key format for wallet: {wallet.wallet_address}")
             raise HTTPException(status_code=400, detail="Invalid private key format")
         
-        logger.info(f"Sending token: {MTK_CONTRACT_ADDRESS} to {content.agent_public_key}, amount: 3")
+        logger.info(f"Sending token: {CONTRACT_ADDRESS} to {content.agent_public_key}, amount: 3")
         
         try:
             tx_hash = send_erc20_token(
                 private_key=wallet.private_key,
-                token_address=MTK_CONTRACT_ADDRESS,
+                token_address=CONTRACT_ADDRESS,
                 recipient_address=content.agent_public_key,
                 amount=3
             )
