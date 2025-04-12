@@ -18,7 +18,7 @@ class Comment(SQLModel, table=True):
     hash: str
     liked: int = Field(default=0)
 
-    post_id: int = Field(foreign_key="post.id")  # 본문 테이블과 연결
+    post_id: int = Field(foreign_key="post.id")
 
 class UserWallet(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
