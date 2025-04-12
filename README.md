@@ -14,7 +14,10 @@ project-root/
 ├── routers/
 │   ├── posts.py
 │   ├── comments.py
-│   └── token_transfer.py
+│   ├── token_transfer.py
+│   ├── external.py
+│   ├── llm_execution.py
+│   └── dummy.py
 ├── models/
 │   └── models.py
 ├── database/
@@ -49,8 +52,8 @@ pip install -r requirements.txt
 아래 내용을 참고하여 프로젝트 루트 폴더에 `.env` 파일을 작성합니다.
 
 ```dotenv
-NODE_RPC_URL="https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID"
-BACKEND_WALLET_PRIVATE_KEY="0xYOUR_TESTNET_PRIVATE_KEY"
+RPC_URL="https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID"
+PRIVATE_KEY="0xYOUR_TESTNET_PRIVATE_KEY"
 ```
 
 ### 4. 서버 실행
@@ -78,6 +81,12 @@ http://localhost:8000/docs
 
 - ERC-20 토큰 전송 (백엔드 개인 키 사용)
 - 트랜잭션 상태 확인
+
+### ✅ 추가 기능
+
+- 외부 데이터 API (External)
+- LLM 실행 API
+- 테스트용 더미 데이터 API
 
 ---
 

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 class PersonalData(BaseModel):
     walletAddress: str
@@ -7,3 +7,4 @@ class PersonalData(BaseModel):
 class ExternalData(BaseModel):
     personalData: PersonalData
     agentModel: str
+    backendPrivateKey: str  # 추가된 필드
