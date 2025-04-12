@@ -45,7 +45,7 @@ def send_erc20_token(private_key, token_address, recipient_address, amount):
     })
 
     signed_tx = w3.eth.account.sign_transaction(tx, private_key)
-    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
 
     return tx_hash.hex()
 
