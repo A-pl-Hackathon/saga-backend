@@ -1,21 +1,33 @@
 # routers/token_transfer.py
-from fastapi import APIRouter, HTTPException, Form
-from services.blockchain import send_erc20_token
+from fastapi import APIRouter, HTTPException, Form, Depends
+from sqlalchemy.orm import Session
+from database.connection import get_session
+from models.models import UserWallet
+from services.saga_blockchain import send_saga_token
 
 router = APIRouter()
 
 @router.post("/transfer-token/")
 def transfer_token(
-    token_address: str = Form(...),
+    wallet_address: str = Form(...),
     recipient_address: str = Form(...),
-    amount: str = Form(...)
+    amount: float = Form(...),
+    session: Session = Depends(get_session)
 ):
     try:
-        tx_hash = send_erc20_token(token_address, recipient_address, amount)
-        explorer_link = f"https://sepolia.etherscan.io/tx/{tx_hash}"
+        wallet = session.query(UserWallet).filter(UserWallet.wallet_address == wallet_address).first()
+        if not wallet:
+            raise HTTPException(status_code=404, detail="Wallet not found")
+        
+        tx_hash = send_saga_token(
+            private_key=wallet.private_key,
+            recipient_address=recipient_address,
+            amount=amount
+        )
+        explorer_link = f"https://explorer.saga.xyz/tx/{tx_hash}"
 
         return {
-            "message": "토큰 전송이 성공적으로 요청되었습니다.",
+            "message": "Token transfer request received.",
             "tx_hash": tx_hash,
             "explorer_link": explorer_link
         }

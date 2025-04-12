@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database.connection import get_session
 from models.models import Post, Comment, UserWallet
 from datetime import datetime
-from services.blockchain import send_erc20_token
+from services.saga_blockchain import send_saga_token
 import os
 from dotenv import load_dotenv
 import hashlib
@@ -13,7 +13,6 @@ from sqlalchemy import text
 import logging
 import traceback
 
-# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -21,10 +20,8 @@ router = APIRouter()
 
 load_dotenv()
 
-CONTRACT_ADDRESS = os.getenv("CONTRACT_ADDRESS")
-logger.info(f"Using MTK Contract Address: {CONTRACT_ADDRESS}")
+logger.info("Using Saga Blockchain Network")
 
-# LLM이 호출하는 함수 형태 정의
 class LLMFunctionCall(BaseModel):
     function: str
     arguments: dict
@@ -75,12 +72,11 @@ def increment_like(validated_args: IncrementLikeArgs, session: Session):
             logger.error(f"Invalid private key format for wallet: {wallet.wallet_address}")
             raise HTTPException(status_code=400, detail="Invalid private key format")
         
-        logger.info(f"Sending token: {CONTRACT_ADDRESS} to {content.agent_public_key}, amount: 3")
+        logger.info(f"Sending Saga tokens to {content.agent_public_key}, amount: 3")
         
         try:
-            tx_hash = send_erc20_token(
+            tx_hash = send_saga_token(
                 private_key=wallet.private_key,
-                token_address=CONTRACT_ADDRESS,
                 recipient_address=content.agent_public_key,
                 amount=3
             )
