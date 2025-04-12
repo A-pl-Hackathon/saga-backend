@@ -21,7 +21,7 @@ def create_comment(
         hash=hash,
         post_id=post_id,
         created_at=datetime.utcnow(),
-        liked=False
+        liked=0
     )
     session.add(new_comment)
     session.commit()

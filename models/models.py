@@ -8,7 +8,7 @@ class Post(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     content: str
     hash: str
-    liked: bool = Field(default=False)
+    liked: int = Field(default=0)
 
 class Comment(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -16,6 +16,6 @@ class Comment(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     content: str
     hash: str
-    liked: bool = Field(default=False)
+    liked: int = Field(default=0)
 
     post_id: int = Field(foreign_key="post.id")  # 본문 테이블과 연결

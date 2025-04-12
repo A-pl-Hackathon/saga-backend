@@ -19,7 +19,7 @@ def create_post(
         content=content,
         hash=hash,
         created_at=datetime.utcnow(),
-        liked=False
+        liked=0
     )
     session.add(new_post)
     session.commit()
